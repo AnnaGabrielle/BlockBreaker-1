@@ -15,13 +15,17 @@ public class AG_Ball : MonoBehaviour {
 
 
 	//vector for ball when launched (direction to be launched)
-	[SerializeField] float ag_startballminX = 2;
+	[Range(5,20)][SerializeField] float ag_constantVelocity = 15;
+	[SerializeField] float ag_startballminX = -10;
 	[SerializeField] float ag_startballMaxX = 10;
 	[SerializeField] float ag_startballY = 15;
 
 	//variables to calculate to change the velocity of the ball while playing
 	float ag_velocity;
-	[Range(0,2)][SerializeField] float ag_ballFactor = 0.8f;
+	[Range(0,1)][SerializeField] float ag_ballFactorX = 0.3f;
+	[Range(0.5f,2)][SerializeField] float ag_ballFactorYmax = 0.5f;
+	[Range(0.1f,2)][SerializeField] float ag_ballFactorYmin = 0.1f;
+	float ag_ranfomFactor = 0.6f;
 
 	//Cached component reference
 	AudioSource ag_AudioSource;
@@ -42,6 +46,7 @@ public class AG_Ball : MonoBehaviour {
 			AG_LockBallToPaddle();
 			AG_LaunchBallOnClick();
 		}
+		//Debug.Log("velocity no update" + ag_MyRigidbody2D.velocity);
 	}
 
 	private void AG_DistancePaddleAndBall(){
@@ -56,29 +61,21 @@ public class AG_Ball : MonoBehaviour {
 	private void AG_LaunchBallOnClick(){
 		if(Input.GetMouseButtonDown(ag_MouseButton)){
 			ag_MyRigidbody2D.velocity = new Vector2 (Random.Range(ag_startballminX, ag_startballMaxX), ag_startballY);
+			ag_MyRigidbody2D.velocity = ag_constantVelocity * (ag_MyRigidbody2D.velocity.normalized);
 			ag_ballLaunched = true;
 		}
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision){
-		Vector2 ag_velocityTweak = new Vector2(AG_CalcuteVelocity(ag_startballMaxX), AG_CalcuteVelocity(ag_startballY));
+		Vector2 ag_velocityTweak = new Vector2(ag_ranfomFactor,ag_ranfomFactor);
 		if(ag_ballLaunched){
 			AudioClip ag_audioForBall = ag_BallAudios[Random.Range(0, ag_BallAudios.Length)];
 			ag_AudioSource.PlayOneShot(ag_audioForBall);
 			ag_MyRigidbody2D.velocity += ag_velocityTweak;
+			Debug.Log("ag_MyRigidbody2D.velocity antes " + ag_MyRigidbody2D.velocity);
+			ag_MyRigidbody2D.velocity = ag_constantVelocity * (ag_MyRigidbody2D.velocity.normalized);
+			Debug.Log("ag_MyRigidbody2D.velocity depois" + ag_MyRigidbody2D.velocity);
 		}
-	}
-
-	private float AG_CalcuteVelocity(float start_variable){ //method for the ball not be too fast
-		float aux_variable = Random.Range(0, ag_ballFactor); //variable to help calculate
-		if(aux_variable>=(start_variable+10*ag_ballFactor)){
-			ag_velocity = aux_variable;
-		}
-		else{
-			ag_velocity = start_variable;
-		}
-		return aux_variable;
-		
 	}
 
 }
