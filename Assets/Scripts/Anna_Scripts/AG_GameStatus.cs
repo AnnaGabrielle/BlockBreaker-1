@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class AG_GameStatus : MonoBehaviour {
 
-	[Range(0.1f,3)][SerializeField] float ag_GameSpeed =1f; //1 is normal speed
+	[Range(0.1f,3)][SerializeField] float ag_GameSpeed =0.8f; //1 is normal speed
 
-	[SerializeField] int ag_currentScore = 0;
+	int ag_currentScore = 0;
 	[SerializeField] int ag_pointPerBlock = 10;
 	[SerializeField] int ag_pointPerMinion = 20;
 
@@ -22,11 +22,7 @@ public class AG_GameStatus : MonoBehaviour {
 			DontDestroyOnLoad(gameObject);
 		}
 	}
-	void Start () {
-		//store text
-	}
 	
-	// Update is called once per frame
 	void Update () {
 		Time.timeScale = ag_GameSpeed;
 	}

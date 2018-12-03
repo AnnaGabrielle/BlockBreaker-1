@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Level2 Scene.unity
+    path: Assets/Scenes/Level2Scene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/LosePlaceHolder.unity
@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene3PlaceHolder.unity
     guid: 8d9a8a0b77ffdfb4d966304e94103ea1
   - enabled: 1
-    path: Assets/Scenes/WinPlaceHolder.unity
+    path: Assets/Scenes/WinScene.unity
     guid: c2661a794ccca8d44ab4279e65cb158a
+  - enabled: 1
+    path: Assets/Scenes/LevelSelectionScene.unity
+    guid: 2d7fb7660c4339345b2689a2853b13e5
   m_configObjects: {}

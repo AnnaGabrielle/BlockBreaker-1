@@ -13,7 +13,7 @@ public class AG_Block : MonoBehaviour {
 	AG_GameStatus ag_GameStatus;
 
 	//state reference
-	[SerializeField] int ag_TimeHit; // serialized to debug
+	int ag_TimeHit; 
 
 	// Use this for initialization
 	void Start () {

@@ -11,15 +11,16 @@ public class AG_GameLevel : MonoBehaviour {
 	[SerializeField] GameObject ag_BackMainMenu;
 	[SerializeField] GameObject ag_BackgroundImageWin;
 
+	//to disappear when winning condition is met
 	[SerializeField] GameObject ag_Paddle;
 	[SerializeField] GameObject ag_Ball;
 
+	//quantity of blocks
 	int ag_BreakableBlocks;
 	int ag_MinionBlocks;
 	int ag_UnbreakableBlocks;
 
-	//[SerializeField] string ag_NextLevel;
-
+	//Tags name
 	public string ag_BreakableBlocksTAG;
 	public string ag_UnbreakableBlocksTAG;
 	public string ag_RedMinionTAG;
@@ -56,7 +57,6 @@ public class AG_GameLevel : MonoBehaviour {
 
 	public void AG_WinConditional(){
 		if(ag_BreakableBlocks <=0 && ag_MinionBlocks<=0){
-			//SceneManager.LoadScene(ag_NextLevel);
 			ag_BackMainMenu.SetActive(true);
 			ag_NextLevel.SetActive(true);
 			ag_WinLevelText.SetActive(true);
